@@ -7,7 +7,7 @@
 set -e
 
 # the name of the compressed image
-PROJECT_IMAGE="##REPO_NAME##"
+PROJECT_IMAGE="telestion-project-rocketsound"
 # relative path to the config file
 CONFIG_PATH="config.json"
 

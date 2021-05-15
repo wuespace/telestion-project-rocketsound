@@ -5,7 +5,7 @@ ENV WORK_DIR /usr/telestion
 EXPOSE 9870
 
 COPY conf/config.json $WORK_DIR/config.json
-COPY build/distributions/##REPO_NAME##.tar $WORK_DIR/
+COPY build/distributions/telestion-project-rocketsound.tar $WORK_DIR/
 COPY docker/exec.sh $WORK_DIR/
 
 WORKDIR $WORK_DIR

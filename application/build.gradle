@@ -4,7 +4,7 @@ plugins {
     id 'application'
 }
 
-group '##GROUP_ID##'
+group 'de.wuespace.telestion.project.rocketsound'
 
 sourceCompatibility = gradle.sourceCompatibility
 targetCompatibility = gradle.targetCompatibility
