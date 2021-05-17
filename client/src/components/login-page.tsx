@@ -4,7 +4,7 @@ import {
 	LoginLogo,
 	LoginDescription,
 	LoginForm
-} from "@wuespace/telestion-client-common";
+} from '@wuespace/telestion-client-common';
 
 export function LoginPage() {
 	return (
@@ -12,7 +12,10 @@ export function LoginPage() {
 			<LoginLogo />
 			<LoginTitle />
 			<LoginDescription />
-			<LoginForm initialServerURL="http://localhost:9870/bridge" />
+			<LoginForm
+				initialServerURL="http://localhost:9870/bridge"
+				initialUsername="admin"
+			/>
 		</TCLoginPage>
 	);
 }
