@@ -6,22 +6,28 @@ export const recoveryDashboard: Dashboard = {
 	rows: 12,
 	widgets: [
 		{
+			id: 'recovery-0',
 			widgetName: 'stateWidget',
 			width: 2,
 			height: 4,
-			title: 'stateWidget'
+			initialProps: {
+				title: 'stateWidget'
+			}
 		},
 		{
+			id: 'recovery-1',
 			widgetName: 'mapWidget',
 			width: 10,
-			height: 12,
-			title: 'GPS Position'
+			height: 12
 		},
 		{
+			id: 'recovery-2',
 			widgetName: 'gpsDetailsWidget',
 			width: 2,
 			height: 5,
-			title: 'GPS Details'
+			initialProps: {
+				title: 'GPS Details'
+			}
 		}
 	]
 };

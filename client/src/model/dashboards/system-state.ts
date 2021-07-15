@@ -7,53 +7,64 @@ export const systemStateDashboard: Dashboard = {
 	rows: 12,
 	widgets: [
 		{
+			id: 'system-state-0',
 			widgetName: 'stateWidget',
 			width: 4,
 			height: 3,
-			title: 'stateWidget'
+			initialProps: {
+				title: 'stateWidget'
+			}
 		},
 		{
+			id: 'system-state-1',
 			widgetName: 'graphWidget',
 			width: 4,
 			height: 6,
-			title: 'Pressure',
 			initialProps: {
 				...pressureGraph,
+				title: 'Pressure',
 				maxDataSamples: 60,
 				isCartesianGrid: true
 			}
 		},
 		{
+			id: 'system-state-2',
 			widgetName: 'mapWidget',
 			width: 4,
 			height: 12,
-			title: 'GPS Data'
+			initialProps: {
+				title: 'GPS Data'
+			}
 		},
 		{
+			id: 'system-state-3',
 			widgetName: '9dof-widget',
 			width: 4,
 			height: 3,
-			title: 'Current values'
+			initialProps: {
+				title: 'Current values'
+			}
 		},
-
 		{
+			id: 'system-state-4',
 			widgetName: 'graphWidget',
 			width: 4,
 			height: 6,
-			title: 'Altitude',
 			initialProps: {
 				...altitudeGraph,
+				title: 'Altitude',
 				maxDataSamples: 60,
 				isCartesianGrid: true
 			}
 		},
 		{
+			id: 'system-state-5',
 			widgetName: 'graphWidget',
 			width: 4,
 			height: 6,
-			title: 'Temperature',
 			initialProps: {
 				...temperatureGraph,
+				title: 'Temperature',
 				maxDataSamples: 60,
 				isCartesianGrid: true
 			}

@@ -4,6 +4,8 @@ import { WidgetProps } from './model';
 
 export const widget: Widget<WidgetProps> = {
 	name: 'waveformWidget',
+	title: 'Waveform Widget',
+	version: '0.1.0',
 	Widget: WidgetRenderer
 };
 

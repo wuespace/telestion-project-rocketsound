@@ -7,8 +7,9 @@ import { NineDofMessage } from '../../model/messages';
 import { NineDOF } from '../../model/channels';
 
 import { Table } from './table';
+import { WidgetProps } from './model';
 
-export function Widget({ title }: BaseRendererProps) {
+export function Widget({ title }: BaseRendererProps<WidgetProps>) {
 	const latestData = useChannelLatest<NineDofMessage>(NineDOF);
 
 	return (

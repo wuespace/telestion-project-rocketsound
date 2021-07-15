@@ -6,8 +6,9 @@ import { LoadingIndicator } from '@wuespace/telestion-client-common';
 import { GpsDataMessage } from '../../model/messages';
 import { GpsData } from '../../model/channels';
 import { DetailsTable } from './details-table';
+import { WidgetProps } from './model';
 
-export function Widget({ title }: BaseRendererProps) {
+export function Widget({ title }: BaseRendererProps<WidgetProps>) {
 	const latestData = useChannelLatest<GpsDataMessage>(GpsData);
 
 	const isFixEstablished = latestData && latestData.fix;

@@ -4,6 +4,8 @@ import { WidgetProps } from './model';
 
 export const widget: Widget<WidgetProps> = {
 	name: 'graphWidget',
+	title: 'Graph Widget',
+	version: '0.1.0',
 	Widget: WidgetRenderer
 };
 

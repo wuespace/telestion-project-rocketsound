@@ -2,6 +2,7 @@ import { GraphWidgetProps } from '../../../widgets/graph-widget';
 import { Amplitude, BaroData, NineDOF, Velocity } from '../../channels';
 
 export const accLineGraph: GraphWidgetProps = {
+	title: 'OVERWRITE_ME!',
 	connections: [
 		{
 			channel: NineDOF,
@@ -31,6 +32,7 @@ export const accLineGraph: GraphWidgetProps = {
 };
 
 export const gyroLineGraph: GraphWidgetProps = {
+	title: 'OVERWRITE_ME!',
 	connections: [
 		{
 			channel: NineDOF,
@@ -60,6 +62,7 @@ export const gyroLineGraph: GraphWidgetProps = {
 };
 
 export const magLineGraph: GraphWidgetProps = {
+	title: 'OVERWRITE_ME!',
 	connections: [
 		{
 			channel: NineDOF,
@@ -89,6 +92,7 @@ export const magLineGraph: GraphWidgetProps = {
 };
 
 export const altitudeGraph: GraphWidgetProps = {
+	title: 'OVERWRITE_ME!',
 	connections: [
 		{
 			channel: BaroData,
@@ -106,6 +110,7 @@ export const altitudeGraph: GraphWidgetProps = {
 };
 
 export const pressureGraph: GraphWidgetProps = {
+	title: 'OVERWRITE_ME!',
 	connections: [
 		{
 			channel: BaroData,
@@ -123,6 +128,7 @@ export const pressureGraph: GraphWidgetProps = {
 };
 
 export const temperatureGraph: GraphWidgetProps = {
+	title: 'OVERWRITE_ME!',
 	connections: [
 		{
 			channel: BaroData,
@@ -140,6 +146,7 @@ export const temperatureGraph: GraphWidgetProps = {
 };
 
 export const amplitudeGraph: GraphWidgetProps = {
+	title: 'OVERWRITE_ME!',
 	connections: [
 		{
 			channel: Amplitude,
@@ -171,6 +178,7 @@ export const amplitudeGraph: GraphWidgetProps = {
 };
 
 export const velocityGraph: GraphWidgetProps = {
+	title: 'OVERWRITE_ME!',
 	connections: [
 		{
 			channel: Velocity,

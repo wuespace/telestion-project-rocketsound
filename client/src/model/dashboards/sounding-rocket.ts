@@ -7,41 +7,52 @@ export const soundingRocketDashboard: Dashboard = {
 	rows: 12,
 	widgets: [
 		{
+			id: 'sounding-rocket-0',
 			widgetName: 'stateWidget',
 			width: 2,
 			height: 4,
-			title: 'stateWidget'
+			initialProps: {
+				title: 'stateWidget'
+			}
 		},
 		{
+			id: 'sounding-rocket-1',
 			widgetName: 'graphWidget',
 			width: 10,
 			height: 4,
-			title: 'Amplitude',
 			initialProps: {
 				...amplitudeGraph,
+				title: 'Amplitude',
 				maxDataSamples: 100,
 				isCartesianGrid: true
 			}
 		},
 		{
+			id: 'sounding-rocket-2',
 			widgetName: 'placeholderWidget',
 			width: 2,
 			height: 8,
-			title: 'Placeholder'
+			initialProps: {
+				title: 'Placeholder'
+			}
 		},
 		{
+			id: 'sounding-rocket-3',
 			widgetName: 'spectrogramWidget',
 			width: 10,
 			height: 4,
-			title: 'Spectrogram Widget'
+			initialProps: {
+				title: 'Spectrogram Widget'
+			}
 		},
 		{
+			id: 'sounding-rocket-4',
 			widgetName: 'graphWidget',
 			width: 10,
 			height: 4,
-			title: 'Velocity',
 			initialProps: {
 				...velocityGraph,
+				title: 'Velocity',
 				maxDataSamples: 100,
 				isCartesianGrid: true
 			}

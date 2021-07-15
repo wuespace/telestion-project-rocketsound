@@ -20,12 +20,12 @@ import { widget as placeholderWidget } from './placeholder-widget';
 export const projectWidgets: Widget[] = [
 	// ARRAY_FIRST_ELEMENT_INSERT_MARK
 	placeholderWidget,
-	gpsDetailsWidget,
-	spectrogramWidget,
+	gpsDetailsWidget as Widget,
+	spectrogramWidget as Widget,
 	mapWidget,
 	stateWidget,
 	graphWidget as Widget,
-	nineDofWidget,
+	nineDofWidget as Widget,
 	sampleWidget,
 	waveformWidget as Widget
 ];

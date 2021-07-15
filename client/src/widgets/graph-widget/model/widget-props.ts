@@ -24,6 +24,11 @@ export type ScaleType =
 
 export interface WidgetProps extends GenericProps {
 	/**
+	 * The title of the widget.
+	 */
+	title: string;
+
+	/**
 	 * Connections to get data from.
 	 */
 	connections: ChartConnection[];

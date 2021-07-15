@@ -1,3 +1,5 @@
+import { GenericProps } from '@wuespace/telestion-client-types';
+
 export type ColumnKey = string;
 
 /**
@@ -26,3 +28,10 @@ export type Item = {
 	 */
 	key: string;
 } & Record<ColumnKey, ItemValue>;
+
+export interface WidgetProps extends GenericProps {
+	/**
+	 * The title of the widget.
+	 */
+	title: string;
+}
