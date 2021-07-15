@@ -2,7 +2,7 @@ import {
 	Cell,
 	Column,
 	Row,
-	Table as RSTable,
+	TableView as RSTable,
 	TableBody,
 	TableHeader
 } from '@react-spectrum/table';

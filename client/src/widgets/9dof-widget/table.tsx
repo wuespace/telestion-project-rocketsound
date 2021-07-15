@@ -1,5 +1,5 @@
 import {
-	Table as RSTable,
+	TableView as RSTable,
 	TableHeader,
 	Column,
 	TableBody,
