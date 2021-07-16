@@ -1,7 +1,7 @@
 {
 	"name": "telestion-project-rocketsound",
 	"description": "telestion-project-rocketsound, a Telestion PSC generated using the telestion-client-cli",
-	"version": "0.1.2",
+	"version": "0.1.3",
 	"homepage": ".",
 	"engines": {
 		"node": ">=14",
