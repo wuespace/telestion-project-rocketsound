@@ -1,3 +1,12 @@
+## [0.1.3](https://github.com/wuespace/telestion-project-rocketsound/compare/v0.1.2...v0.1.3) (2021-07-16)
+
+
+### Bug Fixes
+
+* **application:** Fix identation in production configuration for docker-compose ([0193d12](https://github.com/wuespace/telestion-project-rocketsound/commit/0193d1275f2f438d010e09b9b58a4577a9c5960e))
+
+
+
 ## [0.1.2](https://github.com/wuespace/telestion-project-rocketsound/compare/v0.1.1...v0.1.2) (2021-07-16)
 
 
