@@ -1,3 +1,12 @@
+## [0.1.2](https://github.com/wuespace/telestion-project-rocketsound/compare/v0.1.1...v0.1.2) (2021-07-16)
+
+
+### Bug Fixes
+
+* Fix docker publish workflow (2) ([4648520](https://github.com/wuespace/telestion-project-rocketsound/commit/46485203051d060be06d4dbdc46e1e85250f02f4))
+
+
+
 ## [0.1.1](https://github.com/wuespace/telestion-project-rocketsound/compare/v0.1.0...v0.1.1) (2021-07-16)
 
 
