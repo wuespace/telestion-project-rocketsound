@@ -23,8 +23,8 @@ jobs:
       - name: Set up JDK 16 💿
         uses: actions/setup-java@v2.1.0
         with:
-          distribution: 'zulu'
-          java-version: '16'
+          distribution: "zulu"
+          java-version: "16"
           java-package: jdk
       - name: Set up Docker Buildx ⬆
         uses: docker/setup-buildx-action@v1.5.1
@@ -38,7 +38,7 @@ jobs:
           path: ${{ github.workspace }}
 
       - name: Import environment ⛓
-        run: cat .build-env >> $GITHUB_ENV
+        run: cat "${GITHUB_WORKSPACE}/.build-env" >> $GITHUB_ENV
 
       - name: Cache Docker layers ♻️
         uses: actions/cache@v2.1.6
