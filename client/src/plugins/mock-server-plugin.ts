@@ -19,7 +19,7 @@ class RocketSoundMockServer extends MockServer implements OnInit, OnClose {
 
 	readonly amplitudeData: Array<AmplitudeMessage> = [
 		{
-			className: 'org.telestion.core.database.DbResponse',
+			className: 'de.wuespace.telestion.services.database.DbResponse',
 			dataType: 'de.jvpichowski.rocketsound.messages.sound.Amplitude',
 			result: [
 				{
@@ -31,7 +31,7 @@ class RocketSoundMockServer extends MockServer implements OnInit, OnClose {
 			]
 		},
 		{
-			className: 'org.telestion.core.database.DbResponse',
+			className: 'de.wuespace.telestion.services.database.DbResponse',
 			dataType: 'de.jvpichowski.rocketsound.messages.sound.Amplitude',
 			result: [
 				{
@@ -43,7 +43,7 @@ class RocketSoundMockServer extends MockServer implements OnInit, OnClose {
 			]
 		},
 		{
-			className: 'org.telestion.core.database.DbResponse',
+			className: 'de.wuespace.telestion.services.database.DbResponse',
 			dataType: 'de.jvpichowski.rocketsound.messages.sound.Amplitude',
 			result: [
 				{
@@ -59,7 +59,7 @@ class RocketSoundMockServer extends MockServer implements OnInit, OnClose {
 
 	readonly flightStates: Array<FlightStateMessage> = [
 		{
-			className: 'org.telestion.core.database.DbResponse',
+			className: 'de.wuespace.telestion.services.database.DbResponse',
 			dataType: 'de.jvpichowski.rocketsound.messages.base.FlightState',
 			result: [
 				{
@@ -70,7 +70,7 @@ class RocketSoundMockServer extends MockServer implements OnInit, OnClose {
 			]
 		},
 		{
-			className: 'org.telestion.core.database.DbResponse',
+			className: 'de.wuespace.telestion.services.database.DbResponse',
 			dataType: 'de.jvpichowski.rocketsound.messages.base.FlightState',
 			result: [
 				{
@@ -85,7 +85,7 @@ class RocketSoundMockServer extends MockServer implements OnInit, OnClose {
 
 	readonly baroData: Array<BaroDataMessage> = [
 		{
-			className: 'org.telestion.core.database.DbResponse',
+			className: 'de.wuespace.telestion.services.database.DbResponse',
 			dataType: 'de.jvpichowski.rocketsound.messages.base.BaroData',
 			result: [
 				{
@@ -106,7 +106,7 @@ class RocketSoundMockServer extends MockServer implements OnInit, OnClose {
 			]
 		},
 		{
-			className: 'org.telestion.core.database.DbResponse',
+			className: 'de.wuespace.telestion.services.database.DbResponse',
 			dataType: 'de.jvpichowski.rocketsound.messages.base.BaroData',
 			result: [
 				{
@@ -131,7 +131,7 @@ class RocketSoundMockServer extends MockServer implements OnInit, OnClose {
 
 	readonly spectrumData: Array<SpectrumMessage> = [
 		{
-			className: 'org.telestion.core.database.DbResponse',
+			className: 'de.wuespace.telestion.services.database.DbResponse',
 			dataType: 'de.jvpichowski.rocketsound.messages.sound.Spectrum',
 			result: [
 				{

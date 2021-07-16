@@ -10,7 +10,7 @@ sourceCompatibility = gradle.sourceCompatibility
 targetCompatibility = gradle.targetCompatibility
 
 application {
-    mainClassName = 'de.wuespace.telestion.application.Telestion'
+    mainClass.set('de.wuespace.telestion.application.Telestion')
 }
 
 repositories {

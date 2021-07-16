@@ -38,7 +38,7 @@ export const systemStateDashboard: Dashboard = {
 		},
 		{
 			id: 'system-state-3',
-			widgetName: '9dof-widget',
+			widgetName: '9dofWidget',
 			width: 4,
 			height: 3,
 			initialProps: {

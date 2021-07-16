@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+  telestion:
+    image: "ghcr.io/wuespace/telestion-project-rocketsound:latest"
+      restart: always
+      ports:
+        # passthroughs TCP EventBus Bridge to allow connections from clients on host
+        - "9870:9870"
+        # passthroughs TCP server to allow serial client connections from host
+        - "127.0.0.1:9871:9871"
+      volumes:
+        # pass configuration to container
+        - type: bind
+          source: "./conf"
+          target: "/usr/telestion/telestion-project-rocketsound/conf"
+
+# rename default docker network
+networks:
+  default:
+    name: telestion-project-rocketsound-net
