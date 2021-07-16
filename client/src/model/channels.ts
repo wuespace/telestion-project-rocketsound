@@ -16,19 +16,26 @@ export const MONGODB_FIND =
 	'de.wuespace.telestion.services.database.MongoDatabaseService/in#find';
 
 export const NineDOF =
-	MONGODB_NEW + '/de.wuespace.telestion.project.rocketsound.messages.base.NineDofData';
+	MONGODB_NEW +
+	'/de.wuespace.telestion.project.rocketsound.messages.base.NineDofData';
 export const FlightState =
-	MONGODB_NEW + '/de.wuespace.telestion.project.rocketsound.messages.base.FlightState';
+	MONGODB_NEW +
+	'/de.wuespace.telestion.project.rocketsound.messages.base.FlightState';
 export const GpsData =
-	MONGODB_NEW + '/de.wuespace.telestion.project.rocketsound.messages.base.GpsData';
+	MONGODB_NEW +
+	'/de.wuespace.telestion.project.rocketsound.messages.base.GpsData';
 export const Amplitude =
-	MONGODB_NEW + '/de.wuespace.telestion.project.rocketsound.messages.base.Amplitude';
+	MONGODB_NEW +
+	'/de.wuespace.telestion.project.rocketsound.messages.base.Amplitude';
 export const Spectrum =
-	MONGODB_NEW + '/de.wuespace.telestion.project.rocketsound.messages.sound.Spectrum';
+	MONGODB_NEW +
+	'/de.wuespace.telestion.project.rocketsound.messages.sound.Spectrum';
 export const BaroData =
-	MONGODB_NEW + '/de.wuespace.telestion.project.rocketsound.messages.base.BaroData';
+	MONGODB_NEW +
+	'/de.wuespace.telestion.project.rocketsound.messages.base.BaroData';
 export const Velocity =
-	MONGODB_NEW + '/de.wuespace.telestion.project.rocketsound.messages.base.Velocity';
+	MONGODB_NEW +
+	'/de.wuespace.telestion.project.rocketsound.messages.base.Velocity';
 
 export interface DataMessage<T extends JsonSerializable, C extends string>
 	extends Record<string, JsonSerializable> {
