@@ -1,3 +1,15 @@
+# [1.0.0](https://github.com/wuespace/telestion-project-rocketsound/compare/v0.1.3...v1.0.0) (2021-07-28)
+
+
+* feat!: Release v1 ([dd6b864](https://github.com/wuespace/telestion-project-rocketsound/commit/dd6b864d075945fd0a0a09e104bc774afa0cadb0))
+
+
+### BREAKING CHANGES
+
+* Release v1
+
+
+
 ## [0.1.3](https://github.com/wuespace/telestion-project-rocketsound/compare/v0.1.2...v0.1.3) (2021-07-16)
 
 
