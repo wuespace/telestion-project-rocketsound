@@ -1,3 +1,5 @@
+![20210728_16h34m41s_grim](https://user-images.githubusercontent.com/52416718/127341346-2eb09430-98e2-4f18-9195-31fb4dc02d3a.png)
+
 # Telestion Project RocketSound
 
 This repository holds project-specific resources for RocketSound.
