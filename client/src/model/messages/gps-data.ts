@@ -13,4 +13,4 @@ export interface GpsDataData extends Record<string, JsonSerializable> {
 	className: GpsDataClassName;
 }
 
-export type GpsDataMessage = DataMessage<GpsDataData, GpsDataClassName>;
+export type GpsDataMessage = DataMessage<GpsDataData>;

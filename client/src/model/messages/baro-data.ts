@@ -35,4 +35,4 @@ export interface BaroDataData extends Record<string, JsonSerializable> {
 	className: BaroDataClassName;
 }
 
-export type BaroDataMessage = DataMessage<BaroDataData, BaroDataClassName>;
+export type BaroDataMessage = DataMessage<BaroDataData>;

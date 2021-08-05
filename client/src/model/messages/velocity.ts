@@ -10,4 +10,4 @@ export interface VelocityData extends Record<string, JsonSerializable> {
 	className: VelocityClassName;
 }
 
-export type VelocityMessage = DataMessage<VelocityData, VelocityClassName>;
+export type VelocityMessage = DataMessage<VelocityData>;

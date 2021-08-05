@@ -37,9 +37,8 @@ export const Velocity =
 	MONGODB_NEW +
 	'/de.wuespace.telestion.project.rocketsound.messages.base.Velocity';
 
-export interface DataMessage<T extends JsonSerializable, C extends string>
+export interface DataMessage<T extends JsonSerializable>
 	extends Record<string, JsonSerializable> {
-	dataType: C;
 	result: T[];
 	className: 'de.wuespace.telestion.services.database.DbResponse';
 }
