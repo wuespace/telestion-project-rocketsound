@@ -4,7 +4,7 @@ import de.wuespace.telestion.api.message.JsonMessage;
 import de.wuespace.telestion.project.rocketsound.messages.base.*;
 import de.wuespace.telestion.project.rocketsound.messages.sound.*;
 import de.wuespace.telestion.services.connection.TcpConn;
-import de.wuespace.telestion.services.database.DbResponse;
+import de.wuespace.telestion.extension.mongodb.DbResponse;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
@@ -141,28 +141,28 @@ public final class TcpDataConverter extends AbstractVerticle {
 
 		// publish results
 		vertx.eventBus().publish(publishPrefix + "/de.wuespace.telestion.project.rocketsound.messages.sound.Amplitude",
-				new DbResponse(Amplitude.class, List.of(new Amplitude(amp, freq1, freq2).json())).json());
+				new DbResponse(List.of(new Amplitude(amp, freq1, freq2).json())).json());
 		vertx.eventBus().publish(publishPrefix + "/de.wuespace.telestion.project.rocketsound.messages.sound.Spectrum",
-				new DbResponse(Spectrum.class, List.of(new Spectrum(Arrays.stream(fftBins).min().getAsDouble(), Arrays.stream(fftBins).max().getAsDouble(), fftBins).json())).json());
+				new DbResponse(List.of(new Spectrum(Arrays.stream(fftBins).min().getAsDouble(), Arrays.stream(fftBins).max().getAsDouble(), fftBins).json())).json());
 		vertx.eventBus().publish(publishPrefix + "/de.wuespace.telestion.project.rocketsound.messages.base.Velocity",
-				new DbResponse(Velocity.class, List.of(new Velocity(esthVelo, messVelo).json())).json());
+				new DbResponse(List.of(new Velocity(esthVelo, messVelo).json())).json());
 		vertx.eventBus().publish(publishPrefix + "/de.wuespace.telestion.project.rocketsound.messages.base.NineDofData",
-				new DbResponse(NineDofData.class, List.of(new NineDofData(
+				new DbResponse(List.of(new NineDofData(
 						new Accelerometer(accX, accY, accZ),
 						new Gyroscope(gyroX, gyroY, gyroZ),
 						new Magnetometer(magX, magY, magZ)
 				).json())).json());
 		vertx.eventBus().publish(publishPrefix + "/de.wuespace.telestion.project.rocketsound.messages.base.BaroData",
-				new DbResponse(BaroData.class, List.of(new BaroData(
+				new DbResponse(List.of(new BaroData(
 						new Pressure(press),
 						new Temperature(temp),
 						new Altitude(alt)
 				).json())).json());
 		vertx.eventBus().publish(publishPrefix + "/de.wuespace.telestion.project.rocketsound.messages.base.GpsData",
-				new DbResponse(GpsData.class, List.of(new GpsData(3, fix, latitude, longitude, System.currentTimeMillis()).json())).json());
+				new DbResponse(List.of(new GpsData(3, fix, latitude, longitude, System.currentTimeMillis()).json())).json());
 		var stateIdx = 1;
 		vertx.eventBus().publish(publishPrefix + "/de.wuespace.telestion.project.rocketsound.messages.base.FlightState",
-				new DbResponse(FlightState.class, List.of(new FlightState(stateIdx,
+				new DbResponse(List.of(new FlightState(stateIdx,
 						new String[]{"-", "preparation", "flight", "apogee", "landing", "recovery"}[stateIdx]).json())).json());
 	}
 
