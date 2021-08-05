@@ -11,4 +11,4 @@ export interface AmplitudeData extends Record<string, JsonSerializable> {
 	className: AmplitudeClassName;
 }
 
-export type AmplitudeMessage = DataMessage<AmplitudeData, AmplitudeClassName>;
+export type AmplitudeMessage = DataMessage<AmplitudeData>;

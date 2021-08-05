@@ -41,4 +41,4 @@ export interface NineDofData extends Record<string, JsonSerializable> {
 	className: NineDofClassName;
 }
 
-export type NineDofMessage = DataMessage<NineDofData, NineDofClassName>;
+export type NineDofMessage = DataMessage<NineDofData>;

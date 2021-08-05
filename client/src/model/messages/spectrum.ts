@@ -11,4 +11,4 @@ export interface SpectrumData extends Record<string, JsonSerializable> {
 	className: SpectrumClassName;
 }
 
-export type SpectrumMessage = DataMessage<SpectrumData, SpectrumClassName>;
+export type SpectrumMessage = DataMessage<SpectrumData>;

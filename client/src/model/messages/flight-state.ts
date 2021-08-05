@@ -10,7 +10,4 @@ export interface FlightStateData extends Record<string, JsonSerializable> {
 	className: FlightStateClassName;
 }
 
-export type FlightStateMessage = DataMessage<
-	FlightStateData,
-	FlightStateClassName
->;
+export type FlightStateMessage = DataMessage<FlightStateData>;
