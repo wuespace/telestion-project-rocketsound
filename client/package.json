@@ -63,7 +63,7 @@
 		"react-router-dom": "^5.2.0",
 		"react-virtualized-auto-sizer": "^1.0.6",
 		"recharts": "^2.1.0",
-		"zustand": "^3.5.8"
+		"zustand": "^3.5.9"
 	},
 	"devDependencies": {
 		"@testing-library/jest-dom": "^5.14.1",
