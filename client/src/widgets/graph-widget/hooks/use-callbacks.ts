@@ -47,7 +47,7 @@ export function useCallbacks(
 							dataSample
 						]);
 					} catch (err) {
-						setError(err);
+						if (err instanceof Error) setError(err);
 					}
 				};
 
