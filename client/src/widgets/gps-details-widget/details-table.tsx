@@ -5,7 +5,7 @@ import {
 	TableView as RSTable,
 	TableBody,
 	TableHeader
-} from '@react-spectrum/table';
+} from '@adobe/react-spectrum';
 
 import { GpsDataData } from '../../model/messages';
 import {
