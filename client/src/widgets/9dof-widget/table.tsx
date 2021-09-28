@@ -5,7 +5,7 @@ import {
 	TableBody,
 	Row,
 	Cell
-} from '@react-spectrum/table';
+} from '@adobe/react-spectrum';
 import { NineDofData } from '../../model/messages';
 
 // We need these because they provide the CSS classes used above.
