@@ -24,7 +24,9 @@
 				"name": "TCP Data Converter",
 				"verticle": "de.wuespace.telestion.project.rocketsound.TcpDataConverter",
 				"magnitude": 1,
-				"config": {}
+				"config": {
+					"inAddress": "tcpIncoming"
+				}
 			},
 			{
 				"name": "Eventbus Tcp Bridge",
