@@ -1,65 +1,112 @@
 package de.wuespace.telestion.project.rocketsound;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import de.wuespace.telestion.api.message.JsonMessage;
+import de.wuespace.telestion.api.verticle.TelestionConfiguration;
+import de.wuespace.telestion.api.verticle.TelestionVerticle;
+import de.wuespace.telestion.api.verticle.trait.WithEventBus;
+import de.wuespace.telestion.api.verticle.trait.WithSharedData;
 import de.wuespace.telestion.project.rocketsound.messages.base.*;
 import de.wuespace.telestion.project.rocketsound.messages.sound.*;
 import de.wuespace.telestion.services.connection.TcpConn;
 import de.wuespace.telestion.extension.mongodb.DbResponse;
-import io.vertx.core.AbstractVerticle;
-import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
+import io.vertx.core.shareddata.LocalMap;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Logger;
 
-@SuppressWarnings("ALL")
-public final class TcpDataConverter extends AbstractVerticle {
-	private static final Logger logger = Logger.getLogger(TcpDataConverter.class.getName());
+@SuppressWarnings("unused")
+public final class TcpDataConverter extends TelestionVerticle<TcpDataConverter.Configuration>
+		implements WithEventBus, WithSharedData {
 
-	private static final String publishPrefix = "de.wuespace.telestion.services.database.MongoDatabaseService/out#save";
+	public static final String PUBLISH_PREFIX = "de.wuespace.telestion.services.database.MongoDatabaseService/out#save";
+
+	public static final String[] FLIGHT_STATES = FlightState.FLIGHT_STATES;
+
+	public static void main(String[] args) {
+		Vertx vertx = Vertx.vertx();
+		// publish random data when verticle is deployed
+		vertx.deployVerticle(new TcpDataConverter()).onSuccess(res -> {
+			vertx.eventBus().publish("tcpIncoming", new TcpConn.Data(null, new byte[]{
+					(byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0x50, (byte) 0x00, (byte) 0x00,
+					(byte) 0x00, (byte) 0xB7, (byte) 0x5D, (byte) 0xE8, (byte) 0x3D, (byte) 0xED, (byte) 0xA0,
+					(byte) 0x52, (byte) 0x3E, (byte) 0x81, (byte) 0x5B, (byte) 0x77, (byte) 0xBF, (byte) 0xC3,
+					(byte) 0xF5, (byte) 0x68, (byte) 0x3F, (byte) 0x33, (byte) 0x33, (byte) 0x33, (byte) 0x40,
+					(byte) 0x3E, (byte) 0x0A, (byte) 0x57, (byte) 0x3F, (byte) 0x9E, (byte) 0x41, (byte) 0x03,
+					(byte) 0xBE, (byte) 0x29, (byte) 0xAE, (byte) 0x8A, (byte) 0x3E
+			}).json());
+			vertx.eventBus().publish("tcpIncoming", new TcpConn.Data(null, new byte[]{
+					(byte) 0x88, (byte) 0x11, (byte) 0x02, (byte) 0x3F, (byte) 0x7F, (byte) 0xC6, (byte) 0xAC,
+					(byte) 0x41, (byte) 0xFA, (byte) 0x6F, (byte) 0xA6, (byte) 0x47, (byte) 0x3E, (byte) 0x60,
+					(byte) 0xBA, (byte) 0x44, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00,
+					(byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x7F, (byte) 0x00, (byte) 0x00, (byte) 0x00,
+					(byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00,
+					(byte) 0x00, (byte) 0xFF, (byte) 0xFF, (byte) 0x0D, (byte) 0x0A
+			}).json());
+		});
+	}
+
+	public record Configuration(
+			@JsonProperty String inAddress
+	) implements TelestionConfiguration {
+		public Configuration() {
+			this("tcpIncoming");
+		}
+	}
 
 	@Override
-	public void start(Promise<Void> startPromise) {
+	public void onStart() {
+		setDefaultConfig(new Configuration());
+		register(getConfig().inAddress(), this::handle, TcpConn.Data.class);
 		logger.info("TcpDataConv started");
+	}
 
-		getVertx().eventBus().consumer("tcpIncoming", h -> JsonMessage.on(TcpConn.Data.class, h, data -> {
-			// pull old data from shared storage
-			byte[] oldData = (byte[]) getVertx().sharedData().getLocalMap("BufferedData").getOrDefault("buffer", new byte[0]);
-			byte[] newData = new byte[oldData.length + data.data().length];
+	private void handle(TcpConn.Data data) {
+		var oldData = getData();
+		var newData = new byte[oldData.length + data.data().length];
 
-			// copy old data to new data
-			System.arraycopy(oldData, 0, newData, 0, oldData.length);
-			// append incoming data to new data
-			System.arraycopy(data.data(), 0, newData, oldData.length, data.data().length);
+		// copy old data to new data
+		System.arraycopy(oldData, 0, newData, 0, oldData.length);
+		// append incoming data to new data
+		System.arraycopy(data.data(), 0, newData, oldData.length, data.data().length);
 
-			// interpret received data
-			ByteBuffer buffer = ByteBuffer.wrap(newData);
-			buffer.order(ByteOrder.LITTLE_ENDIAN);
-			for (int i = 0; i < buffer.limit() - 4; i++) {
-				if (buffer.get(i) == (byte) 0xFF && buffer.get(i + 1) == (byte) 0xFF &&
-						buffer.get(i + 2) == (byte) 0xFF && buffer.get(i + 3) == (byte) 0xFF) {
-					int len = buffer.getInt(i + 4);
+		// interpret received data
+		newData = interpret(newData);
 
-					if (i + len <= buffer.limit()) {
-						parseMessage(buffer.slice(i, len));
+		// store it back in local storage
+		setData(newData);
+	}
 
-						// cut last message
-						newData = new byte[buffer.limit() - (i + len)];
-						if (newData.length > 0) buffer.get(i + len, newData, 0, newData.length);
-						buffer = ByteBuffer.wrap(newData);
-						i = 0;
-					}
+	private byte[] interpret(byte[] data) {
+		var result = data;
+
+		ByteBuffer buffer = ByteBuffer.wrap(result);
+		buffer.order(ByteOrder.LITTLE_ENDIAN);
+
+		for (int i = 0; i < buffer.limit() - 4; i++) {
+			// check if the first 4 bytes contain the prefix/start of an encoded message (here 0xFF,0xFF,0xFF,0xFF)
+			if (buffer.get(i) == (byte) 0xFF && buffer.get(i + 1) == (byte) 0xFF &&
+					buffer.get(i + 2) == (byte) 0xFF && buffer.get(i + 3) == (byte) 0xFF) {
+
+				int len = buffer.getInt(i + 4);
+
+				// if the buffer has more content than the reported message length, lets parse the data
+				if (i + len <= buffer.limit()) {
+					parseMessage(buffer.slice(i, len));
+
+					// remove parsed message from result
+					result = new byte[buffer.limit() - (i + len)];
+					if (result.length > 0) buffer.get(i + len, result, 0, result.length);
+					buffer = ByteBuffer.wrap(result);
+					i = 0;
 				}
 			}
+		}
 
-			// push new data into shared storage
-			getVertx().sharedData().getLocalMap("BufferedData").put("buffer", newData);
-		}));
-
-		startPromise.complete();
+		return result;
 	}
 
 	private void parseMessage(ByteBuffer buffer) {
@@ -67,7 +114,7 @@ public final class TcpDataConverter extends AbstractVerticle {
 		int START_BYTES = buffer.getInt();
 		int MESSAGE_LENGTH = buffer.getInt();
 
-		System.out.println("Parsing message with len: " + MESSAGE_LENGTH);
+		logger.debug("Parsing message with len: {}", MESSAGE_LENGTH);
 
 		// extract data piece by piece from buffer
 		float accX = buffer.getFloat();
@@ -139,49 +186,44 @@ public final class TcpDataConverter extends AbstractVerticle {
 		messVelo += 10 * (1.0f + acc);
 		//vertx.sharedData().getLocalMap("DataConv").put("velo", messVelo);
 
-		// publish results
-		vertx.eventBus().publish(publishPrefix + "/de.wuespace.telestion.project.rocketsound.messages.sound.Amplitude",
-				new DbResponse(List.of(new Amplitude(amp, freq1, freq2).json())).json());
-		vertx.eventBus().publish(publishPrefix + "/de.wuespace.telestion.project.rocketsound.messages.sound.Spectrum",
-				new DbResponse(List.of(new Spectrum(Arrays.stream(fftBins).min().getAsDouble(), Arrays.stream(fftBins).max().getAsDouble(), fftBins).json())).json());
-		vertx.eventBus().publish(publishPrefix + "/de.wuespace.telestion.project.rocketsound.messages.base.Velocity",
-				new DbResponse(List.of(new Velocity(esthVelo, messVelo).json())).json());
-		vertx.eventBus().publish(publishPrefix + "/de.wuespace.telestion.project.rocketsound.messages.base.NineDofData",
-				new DbResponse(List.of(new NineDofData(
-						new Accelerometer(accX, accY, accZ),
-						new Gyroscope(gyroX, gyroY, gyroZ),
-						new Magnetometer(magX, magY, magZ)
-				).json())).json());
-		vertx.eventBus().publish(publishPrefix + "/de.wuespace.telestion.project.rocketsound.messages.base.BaroData",
-				new DbResponse(List.of(new BaroData(
-						new Pressure(press),
-						new Temperature(temp),
-						new Altitude(alt)
-				).json())).json());
-		vertx.eventBus().publish(publishPrefix + "/de.wuespace.telestion.project.rocketsound.messages.base.GpsData",
-				new DbResponse(List.of(new GpsData(3, fix, latitude, longitude, System.currentTimeMillis()).json())).json());
+		// TODO: Get current state from telemetry message
 		var stateIdx = 1;
-		vertx.eventBus().publish(publishPrefix + "/de.wuespace.telestion.project.rocketsound.messages.base.FlightState",
-				new DbResponse(List.of(new FlightState(stateIdx,
-						new String[]{"-", "preparation", "flight", "apogee", "landing", "recovery"}[stateIdx]).json())).json());
+
+		publishData(new Amplitude(amp, freq1, freq2));
+		publishData(new Spectrum(
+				Arrays.stream(fftBins).min().getAsDouble(),
+				Arrays.stream(fftBins).max().getAsDouble(),
+				fftBins
+		));
+		publishData(new Velocity(esthVelo, messVelo));
+		publishData(new NineDofData(
+				new Accelerometer(accX, accY, accZ),
+				new Gyroscope(gyroX, gyroY, gyroZ),
+				new Magnetometer(magX, magY, magZ)
+		));
+		publishData(new BaroData(
+				new Pressure(press),
+				new Temperature(temp),
+				new Altitude(alt)
+		));
+		publishData(new GpsData(3, fix, latitude, longitude, System.currentTimeMillis()));
+		publishData(new FlightState(stateIdx, FLIGHT_STATES[stateIdx]));
 	}
 
-	public static void main(String[] args) {
-		Vertx vertx = Vertx.vertx();
-		vertx.deployVerticle(new TcpDataConverter());
-		vertx.eventBus().publish("tcpIncoming", new TcpConn.Data(null, new byte[]{
-				(byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0x50, (byte) 0x00, (byte) 0x00, (byte) 0x00
-				, (byte) 0xB7, (byte) 0x5D, (byte) 0xE8, (byte) 0x3D, (byte) 0xED, (byte) 0xA0, (byte) 0x52, (byte) 0x3E
-				, (byte) 0x81, (byte) 0x5B, (byte) 0x77, (byte) 0xBF, (byte) 0xC3, (byte) 0xF5, (byte) 0x68, (byte) 0x3F
-				, (byte) 0x33, (byte) 0x33, (byte) 0x33, (byte) 0x40, (byte) 0x3E, (byte) 0x0A, (byte) 0x57, (byte) 0x3F
-				, (byte) 0x9E, (byte) 0x41, (byte) 0x03, (byte) 0xBE, (byte) 0x29, (byte) 0xAE, (byte) 0x8A, (byte) 0x3E
-		}).json());
-		vertx.eventBus().publish("tcpIncoming", new TcpConn.Data(null, new byte[]{
-				(byte) 0x88, (byte) 0x11, (byte) 0x02, (byte) 0x3F, (byte) 0x7F, (byte) 0xC6, (byte) 0xAC, (byte) 0x41
-				, (byte) 0xFA, (byte) 0x6F, (byte) 0xA6, (byte) 0x47, (byte) 0x3E, (byte) 0x60, (byte) 0xBA, (byte) 0x44
-				, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00
-				, (byte) 0x7F, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00
-				, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0xFF, (byte) 0xFF, (byte) 0x0D, (byte) 0x0A
-		}).json());
+	private void publishData(JsonMessage data) {
+		var name = data.getClass().getName();
+		publish(PUBLISH_PREFIX + "/" + name, new DbResponse(List.of(data.json())));
+	}
+
+	private byte[] getData() {
+		return localMap().getOrDefault("buffer", new byte[]{});
+	}
+
+	private void setData(byte[] data) {
+		localMap().put("buffer", data);
+	}
+
+	private LocalMap<String, byte[]> localMap() {
+		return localMap("buffered-data");
 	}
 }
