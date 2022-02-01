@@ -17,6 +17,8 @@ jobs:
     steps:
       - name: Checkout 📥
         uses: actions/checkout@v2.4.0
+        with:
+          token: ${{ secrets.GH_RELEASE_TOKEN }}
 
       - name: Download build environment 📥
         uses: dawidd6/action-download-artifact@v2.16.0
