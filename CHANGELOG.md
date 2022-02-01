@@ -1,3 +1,12 @@
+## [1.1.1](https://github.com/wuespace/telestion-project-rocketsound/compare/v1.1.0...v1.1.1) (2022-02-01)
+
+
+### Bug Fixes
+
+* **ci:** Fix creating build env in release workflow ([60597c3](https://github.com/wuespace/telestion-project-rocketsound/commit/60597c333a85e988b88bd02a2eb31a9d9b17143f))
+
+
+
 # [1.1.0](https://github.com/wuespace/telestion-project-rocketsound/compare/v1.0.0...v1.1.0) (2022-02-01)
 
 
