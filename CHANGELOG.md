@@ -1,3 +1,12 @@
+## [1.1.2](https://github.com/wuespace/telestion-project-rocketsound/compare/v1.1.1...v1.1.2) (2022-02-01)
+
+
+### Bug Fixes
+
+* **ci:** Fix push permissions in publish-client workflow ([fa0eaf7](https://github.com/wuespace/telestion-project-rocketsound/commit/fa0eaf700f28313f863ddc8832a90c0ec04f61d8))
+
+
+
 ## [1.1.1](https://github.com/wuespace/telestion-project-rocketsound/compare/v1.1.0...v1.1.1) (2022-02-01)
 
 
