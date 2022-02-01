@@ -52,11 +52,11 @@ jobs:
 
       - name: Create build environment 🗜
         run: |
-          echo "tag=${TAG}" >> ./.build-env
-          echo "version=${VERSION}" >> ./.build-env
-          echo "skipped=${SKIPPED}" >> ./.build-env
-          echo "upload_url=${UPLOAD_URL}" >> ./.build-env
-          echo "html_url=${HTML_URL}" >> ./.build-env
+          echo "tag=${TAG}" >> ~/.build-env
+          echo "version=${VERSION}" >> ~/.build-env
+          echo "skipped=${SKIPPED}" >> ~/.build-env
+          echo "upload_url=${UPLOAD_URL}" >> ~/.build-env
+          echo "html_url=${HTML_URL}" >> ~/.build-env
         env:
           TAG: ${{ steps.changelog.outputs.tag }}
           VERSION: ${{ steps.changelog.outputs.version }}
