@@ -1,12 +1,17 @@
-# For most projects, this workflow file will not need changing; you simply need
-# to commit it to your repository.
+# Before testing this workflow, please create a personal access token with following scopes:
+# - repo
+# - workflow
+# - write:packages
+# - delete:packages
+# - user:email
+# and name it "GH_RELEASE_TOKEN".
 #
-# Before you use this workflow, please take a short look at the conventional commits specification:
+# Please take a short look at the conventional commits specification before using this action:
 # https://www.conventionalcommits.org/en/v1.0.0/
 #
 # ******** NOTE ********
-# If your repository default branch is restricted,
-# please use the release-protected-branch workflow instead.
+# If your repository default branch is **NOT** restricted,
+# please use the default release workflow instead.
 name: Release
 
 # Events that trigger this workflow
@@ -19,24 +24,27 @@ jobs:
     steps:
       - name: Checkout 📥
         uses: actions/checkout@v2.4.0
+        with:
+          persist-credentials: false
+          fetch-depth: 0
 
       - name: Conventional Changelog Action 🎉
         id: changelog
         uses: TriPSs/conventional-changelog-action@v3.10.0
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GH_RELEASE_TOKEN }}
           git-user-name: ${{ github.actor }}
-          git-user-email: '${{ github.actor }}@users.noreply.github.com'
-          release-count: '0'
-          version-file: './project.json'
-          skip-on-empty: 'false'
+          git-user-email: "${{ github.actor }}@users.noreply.github.com"
+          release-count: "0"
+          version-file: "./project.json"
+          skip-on-empty: "false"
 
       - name: Create Release 🪡
         id: create_release
         uses: actions/create-release@v1.1.4
         if: ${{ steps.changelog.outputs.skipped == 'false' }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_RELEASE_TOKEN }}
         with:
           tag_name: ${{ steps.changelog.outputs.tag }}
           release_name: ${{ steps.changelog.outputs.tag }}
@@ -59,6 +67,6 @@ jobs:
       - name: Upload build environment 📤
         uses: actions/upload-artifact@v2.3.1
         with:
-          name: 'build-env'
-          path: './.build-env'
+          name: build-env
+          path: "~/.build-env"
           retention-days: 1
