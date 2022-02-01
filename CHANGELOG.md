@@ -1,3 +1,19 @@
+# [1.1.0](https://github.com/wuespace/telestion-project-rocketsound/compare/v1.0.0...v1.1.0) (2022-02-01)
+
+
+### Bug Fixes
+
+* **application:** Fix invalid/outdated usage of `DBResponse` in packages sending messages on the event bus ([7865e2a](https://github.com/wuespace/telestion-project-rocketsound/commit/7865e2ab8a6507d756c4662ad376715963a63499))
+* **client:** Fix application not sending data type in data message ([4887dc3](https://github.com/wuespace/telestion-project-rocketsound/commit/4887dc3bd612b2fe0a4faf1755f42433c2d6eac7))
+* **widget:** Test catch argument against an Error in `graph-widget` ([7f2f821](https://github.com/wuespace/telestion-project-rocketsound/commit/7f2f82189565cf589dc77285b69815183a456f05))
+
+
+### Features
+
+* **application:** Migrate verticles and messages to Telestion Core v0.6.2 ([6d322c0](https://github.com/wuespace/telestion-project-rocketsound/commit/6d322c0dbbc6bc399b67d94ff7e58fa06d9269a4))
+
+
+
 # [1.0.0](https://github.com/wuespace/telestion-project-rocketsound/compare/v0.1.3...v1.0.0) (2021-07-28)
 
 
