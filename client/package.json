@@ -47,7 +47,7 @@
 		"@monsonjeremy/react-leaflet-core": "^1.1.1",
 		"@react-leaflet/core": "npm:@monsonjeremy/react-leaflet-core@^1.1.1",
 		"@spectrum-icons/illustrations": "^3.2.4",
-		"@spectrum-icons/ui": "^3.2.3",
+		"@spectrum-icons/ui": "^3.2.4",
 		"@spectrum-icons/workflow": "^3.2.1",
 		"@wuespace/telestion-client-common": "^0.18.0",
 		"@wuespace/telestion-client-core": "^0.18.0",
