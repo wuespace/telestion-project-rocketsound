@@ -21,7 +21,7 @@ jobs:
           token: ${{ secrets.GH_RELEASE_TOKEN }}
 
       - name: Download build environment 📥
-        uses: dawidd6/action-download-artifact@v2.19.0
+        uses: dawidd6/action-download-artifact@v2.22.0
         with:
           workflow: ${{ github.event.workflow_run.workflow_id }}
           workflow_conclusion: success
@@ -76,7 +76,7 @@ jobs:
         run: npm install --global npm@v7
 
       - name: Download build environment 📥
-        uses: dawidd6/action-download-artifact@v2.19.0
+        uses: dawidd6/action-download-artifact@v2.22.0
         with:
           workflow: ${{ github.event.workflow_run.workflow_id }}
           workflow_conclusion: success
