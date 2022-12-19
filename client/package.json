@@ -41,7 +41,7 @@
 		]
 	},
 	"dependencies": {
-		"@adobe/react-spectrum": "^3.16.5",
+		"@adobe/react-spectrum": "^3.24.0",
 		"@fliegwerk/logsemts": "^0.4.2",
 		"@monsonjeremy/react-leaflet": "^3.2.2",
 		"@monsonjeremy/react-leaflet-core": "^1.1.1",
